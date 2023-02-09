@@ -1,0 +1,160 @@
+
+
+
+.room-map {
+    margin: 4em 0;
+}
+h4.sing {
+    font-size: 1.5em;
+    font-weight: 700;
+    margin-bottom: 1em;
+    color: #34ad00;
+}
+.hotel-police p {
+    font-size: 15px;
+    line-height: 1.8em;
+    color: #999;
+}
+.hotel-police {
+    margin-bottom: 3em;
+}
+.hotel-amenit li {
+    display: inline-block;
+    float: left;
+    width: 33.33%;
+    line-height: 1.8em;
+    color: #999;
+}
+.hotel-amenit {
+    margin-bottom: 3em;
+}
+/*-- //singlepage --*/
+ul.off-mo {
+    padding: 2em 1em;
+}
+ul.off-mo li {
+    display: block;
+    line-height: 1.8em;
+    font-size: 14px;
+    color: #999;
+    margin-bottom: 1em;
+}
+ul.off-mo span {
+    color:#34ad00;
+    font-weight: 700;
+    font-size: 1.3em;
+}
+/*-- selectroom --*/
+.selectroom {
+    padding: 5em 0 3em;
+}
+.selectroom_top {
+    padding: 2em;
+    box-shadow: 0px 0px 10px -4px #000;
+    margin-bottom: 2em;
+}
+.selectroom_right li {
+    display: inline-block;
+    float: left;
+    width: 21%;
+}
+.grand {
+    text-align: right;
+}
+.selectroom_right h2 {
+	font-size: 1.7em;
+    color: #999;
+    font-weight: 600;
+    margin: 0;
+}	
+.selectroom_right h3 {
+    font-size: 1.7em;
+    font-weight: 600;
+	color:#34ad00;
+}
+p.dow {
+    font-size: 15px;
+    color: #999;
+    font-weight: 300;
+    line-height: 1.8em;
+	margin-bottom:1em;
+}
+.selectroom_right p {
+    font-size: 15px;
+    line-height: 1.6em;
+    font-weight: 300;
+    color: #999;
+}
+.selectroom_right ul {
+    margin-top: 1em;
+}
+.selectroom_right h6 {
+    font-size: 1em;
+    color: #999;
+    line-height: 1.8em;
+}
+.selectroom_right h4 {
+    font-size: 1.2em;
+    color: #34ad00;
+    line-height: 1.8em;
+	font-weight:600;
+}
+.selectroom_right span {
+    font-weight: 700;
+}
+.selectroom-info li {
+    display: inline-block;
+    float: left;
+}
+li.nam {
+    width: 22%;
+}
+li.mr
+{
+    width: 12%;
+}
+
+.selectroom-info ul {
+    margin-top: 3em;
+}
+
+
+/*-- responsive design --*/
+@media (max-width:640px){
+.banner-3 {
+    min-height: 190px;
+}
+}
+
+@media (max-width:414px){
+.banner-3 {
+    min-height: 160px;
+}
+.selectroom_right li {
+    width: 33.33%;
+}
+.selectroom_right p {
+    font-size: 14px;
+}
+.selectroom {
+    padding: 2em 0 0em;
+}
+}
+@media (max-width:320px){
+.selectroom_top {
+    padding: 1em;
+}
+.selectroom-info ul {
+    margin-top: 1em;
+}
+.selectroom_right p {
+    font-size: 13px;
+}
+.selectroom_right h6 {
+    font-size: 0.9em;
+}
+.selectroom_right h3 {
+    font-size: 1.5em;
+}
+}
+
