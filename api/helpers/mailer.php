@@ -9,8 +9,8 @@ function sendEmail($receiverEmail, $subject, $body)
     $smtpHost = "smtp-mail.outlook.com";
     $smtpPort = 587;
 
-    $senderEmail = "phpwebmaster@outlook.com";
-    $password = "GoodPassword@123";
+    $senderEmail = "shivtourism@outlook.com";
+    $password = "Tourism@123";
 
     $mail = new PHPMailer(true);
 
@@ -22,7 +22,7 @@ function sendEmail($receiverEmail, $subject, $body)
     $mail->Password = $password;
 
     //Recipients
-    $mail->setFrom($senderEmail, 'QApp');
+    $mail->setFrom($senderEmail, 'Shiv Tourism');
     $mail->addAddress($receiverEmail);
 
     //Content
