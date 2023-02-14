@@ -23,8 +23,8 @@ try
     
     $connection = new PDO("mysql:host=localhost;port=3306;dbname=tourism", "root", "");
 
-    $statement = $connection->prepare("SELECT * FROM `users` WHERE `Email` = ?");
-    $statement->execute([$email]);
+    $statement = $connection->prepare("SELECT * FROM `users` WHERE `Email` = ? AND UserType = ?");
+    $statement->execute([$email,"U"]);
     $result = $statement->fetch(PDO::FETCH_ASSOC);
 
     if ($result == null)
