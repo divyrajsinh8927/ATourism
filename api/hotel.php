@@ -4,6 +4,9 @@ $connection = new PDO("mysql:host=localhost;port=3306;dbname=tourism", "root", "
 $request = getRequestData();
 switch ($_SERVER["REQUEST_METHOD"]) {
     case "GET":
+        if(isset($_GET["cityId"]))
+            getHotelsByCity($_GET["cityId"],$connection);
+        else
             getAllHotels($connection);
         break;
     case "POST";
@@ -14,6 +17,40 @@ switch ($_SERVER["REQUEST_METHOD"]) {
         http_response_code(405);
         break;
 }
+
+function getHotelsByCity($cityId,$connection)
+{
+    $query = "SELECT * FROM `hotels` WHERE City_Id = ?";
+    $statement = $connection->prepare($query);
+    $arr = Array();
+    $statement->execute([$cityId]);
+    $hotels = $statement->fetchAll(PDO::FETCH_ASSOC);
+    foreach ($hotels as $hotel) {
+        $city_id = $hotel['City_id'];
+        $city = $connection->prepare("Select * from city where Id = $city_id");
+        $city->execute();
+        $cityRecord = $city->fetch();
+        $query = "SELECT * FROM `hotelmedia` WHERE `Hotel_id` = ?";
+        $statement = $connection->prepare($query);
+    
+        $statement->execute([$hotel['Id']]);
+        $hotelsimage = $statement->fetch(PDO::FETCH_ASSOC);
+
+        $tep = [
+            "Id" => $hotel['Id'],
+            "HotelName" => $hotel['HotelName'],
+            "CityName" => $cityRecord['CityName'],
+            "HotelDetail" => $hotel['HotelDetail'],
+            "HotelIsDelete" => $hotel['HotelIsDelete'],
+            "HotelImage" => $hotelsimage['HotelImages']
+        ];
+        array_push($arr, $tep);
+    }
+
+    $json = json_encode($arr);
+    echo $json;
+}
+
 
 function getAllHotels($connection)
 {
