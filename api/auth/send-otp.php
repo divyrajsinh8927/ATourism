@@ -27,9 +27,9 @@ try {
     $subject = 'Shiv Tourism OTP';
     $body = "Your OTP: $otp";
 
-    sendEmail($email, $subject, $body);
+    // sendEmail($email, $subject, $body);
     
-    execute("INSERT INTO `ForgotPasswordOTPs` SET `GeneratedOTP` = ?, `GeneratedOn` = ?, `ExpiresOn` = ?, `UserId` = ?", [$otp, $generatedOn, $expiresOn, $user['Id']]);
+    execute("INSERT INTO `forgotpasswordotps` SET `GeneratedOTP` = ?, `GeneratedOn` = ?, `ExpiresOn` = ?, `User_Id` = ?", [$otp, $generatedOn, $expiresOn, $user['Id']]);
 } catch (Exception $e) {
 
     http_response_code(500);

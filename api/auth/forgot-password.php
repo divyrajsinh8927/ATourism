@@ -19,16 +19,16 @@ if ($user == null) {
     die();
 }
 
-$forgotPasswordOtp = selectOne("SELECT * FROM `ForgotPasswordOTPs` WHERE `User_Id` = ?", [$user['Id']]);
+$forgotPasswordOtp = selectOne("SELECT * FROM `forgotpasswordotps` WHERE `User_Id` = ?", [$user['Id']]);
 if ($forgotPasswordOtp == null || $forgotPasswordOtp['GeneratedOTP'] != $otp) {
-    http_response_code(404);
+    http_response_code(401);
     die();
 }
 
 $currentDate = new DateTime();
 $expiresOn = DateTime::createFromFormat('Y-m-d h:i:s', $forgotPasswordOtp['ExpiresOn']);
-if ($currentDate > $expiresOn) {
-    execute("DELETE FROM `ForgotPasswordOTPs` WHERE `User_Id` = ?", [$user['Id']]);
+if ($currentDate < $expiresOn) {
+    execute("DELETE FROM `forgotpasswordotps` WHERE `User_Id` = ?", [$user['Id']]);
     
     http_response_code(403);
     die(json_encode(["message" => "Wrong or expired OTP!"]));
@@ -36,4 +36,4 @@ if ($currentDate > $expiresOn) {
 
 $passwordHash = password_hash($password, PASSWORD_DEFAULT);
 execute("UPDATE `users` SET `PasswordHash` = ? WHERE `Id` = ?", [$passwordHash, $user['Id']]);
-execute("DELETE FROM `ForgotPasswordOTPs` WHERE `User_Id` = ?", [$user['Id']]);
+execute("DELETE FROM `forgotpasswordotps` WHERE `User_Id` = ?", [$user['Id']]);
