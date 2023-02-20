@@ -8,6 +8,6 @@ $id=$_GET['id'];
 if ($status == 0) {
     $statement = $pdo->prepare("UPDATE booking SET status=? WHERE Id=?");
     $statement->execute(array(1,$id));
-    header("Location: ../../api/firebase/notify.php?User_id=$User_id");
+    header("Location: ../../api/firebase/notify.php?User_id=$User_id&status=1");
 }
 ?>
