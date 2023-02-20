@@ -6,16 +6,16 @@ require './helpers/mailer.php';
 allowedMethods(['POST']);
 $request = getRequestBody();
 
-if (!isset($request->email)) {
-    http_response_code(400);
+if (!isset($request->Email)) {
+    http_response_code(404);
     die(json_encode(["message" => "Incomplete data"]));
 }
 
-$email = $request->email;
+$email = $request->Email;
 $user = selectOne("SELECT * FROM `users` WHERE `Email` = ?", [$email]);
 
 if ($user == null) {
-    http_response_code(400);
+    http_response_code(404);
     die(json_encode(["message" => "Could not send OTP!"]));
 }
 

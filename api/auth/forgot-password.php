@@ -5,7 +5,7 @@ allowedMethods(['POST']);
 
 $request = getRequestBody();
 if (!isset($request->otp) || !isset($request->email) || !isset($request->password)) {
-    http_response_code(400);
+    http_response_code(404);
     die(json_encode(["message" => "Incomplete data"]));
 }
 
@@ -19,21 +19,21 @@ if ($user == null) {
     die();
 }
 
-$forgotPasswordOtp = selectOne("SELECT * FROM `ForgotPasswordOTPs` WHERE `UserId` = ?", [$user['Id']]);
+$forgotPasswordOtp = selectOne("SELECT * FROM `ForgotPasswordOTPs` WHERE `User_Id` = ?", [$user['Id']]);
 if ($forgotPasswordOtp == null || $forgotPasswordOtp['GeneratedOTP'] != $otp) {
-    http_response_code(400);
+    http_response_code(404);
     die();
 }
 
 $currentDate = new DateTime();
 $expiresOn = DateTime::createFromFormat('Y-m-d h:i:s', $forgotPasswordOtp['ExpiresOn']);
 if ($currentDate > $expiresOn) {
-    execute("DELETE FROM `ForgotPasswordOTPs` WHERE `UserId` = ?", [$user['Id']]);
+    execute("DELETE FROM `ForgotPasswordOTPs` WHERE `User_Id` = ?", [$user['Id']]);
     
     http_response_code(403);
     die(json_encode(["message" => "Wrong or expired OTP!"]));
 }
 
 $passwordHash = password_hash($password, PASSWORD_DEFAULT);
-execute("UPDATE `Users` SET `PasswordHash` = ? WHERE `Id` = ?", [$passwordHash, $user['Id']]);
-execute("DELETE FROM `ForgotPasswordOTPs` WHERE `UserId` = ?", [$user['Id']]);
+execute("UPDATE `users` SET `PasswordHash` = ? WHERE `Id` = ?", [$passwordHash, $user['Id']]);
+execute("DELETE FROM `ForgotPasswordOTPs` WHERE `User_Id` = ?", [$user['Id']]);
