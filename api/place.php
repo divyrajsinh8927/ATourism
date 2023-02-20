@@ -4,6 +4,9 @@ $connection = new PDO("mysql:host=localhost;port=3306;dbname=tourism", "root", "
 $request = getRequestData();
 switch ($_SERVER["REQUEST_METHOD"]) {
     case "GET":
+        if(isset($_GET["cityId"]))
+            getPlacesByCity($_GET["cityId"],$connection);
+        else
             getAllPlaces($connection);
         break;
     case "POST":
@@ -13,6 +16,42 @@ switch ($_SERVER["REQUEST_METHOD"]) {
     default:
         http_response_code(405);
         break;
+}
+
+function getPlacesByCity($cityId,$connection)
+{
+    $query = "SELECT * FROM `places` WHERE City_Id = ?";
+    $statement = $connection->prepare($query);
+    $arr = Array();
+    $statement->execute([$cityId]);
+    $places = $statement->fetchAll(PDO::FETCH_ASSOC);
+    foreach ($places as $place) {
+        $city_id = $place['City_id'];
+        $city = $connection->prepare("Select * from city where Id = $city_id");
+        $city->execute();
+        $cityRecord = $city->fetch();
+        $query = "SELECT * FROM `placemedia` WHERE `Place_id` = ? LIMIT 1";
+        $statement = $connection->prepare($query);
+
+    $statement->execute([$place['Id']]);
+    $placesimages = $statement->fetch(PDO::FETCH_ASSOC);
+
+        $tep = [
+            "Id" => $place['Id'],
+            "PlaceName" => $place['PlaceName'],
+            "CityName" => $cityRecord['CityName'],
+            "Discription" => $place['Discription'],
+            "PlaceIsDelete" => $place['PlaceIsDelete'],
+            "PlaceImage" => $placesimages['PlaceImages']
+
+        ];
+        array_push($arr, $tep);
+    }
+
+
+
+    $json = json_encode($arr);
+    echo $json;
 }
 
 function getAllPlaces($connection)
