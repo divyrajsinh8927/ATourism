@@ -19,6 +19,23 @@ function clientReviews($connection)
     $statement->execute();
     $clientreiviws = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-    $json = json_encode(["client reiviws"  => $clientreiviws]);
+    $arr = Array();
+    foreach ($clientreiviws as $clientreiviw) {
+        $userId = $clientreiviw['User_id'];
+        $user = $connection->prepare("Select * from users where Id = ?");
+        $user->execute([$userId]);
+        $userRecord = $user->fetch();
+
+        $tep = [
+            "Id" => $clientreiviw['Id'],
+            "Reviews" => $clientreiviw['Reviews'],
+            "Stars" => $clientreiviw['Stars'],
+            "userName" => $userRecord['Name']
+        ];
+        array_push($arr, $tep);
+
+    }
+
+    $json = json_encode($arr);
     echo $json;
 }

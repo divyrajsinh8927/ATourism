@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 06, 2023 at 08:41 AM
--- Server version: 10.4.22-MariaDB
--- PHP Version: 8.0.13
+-- Generation Time: Feb 24, 2023 at 04:46 PM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -40,7 +40,7 @@ CREATE TABLE `booking` (
   `TotalPrice` int(11) NOT NULL,
   `Status` int(11) DEFAULT NULL,
   `BookingIsCancel` int(11) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `booking`
@@ -63,7 +63,13 @@ INSERT INTO `booking` (`Id`, `User_id`, `BookingFor`, `Hotel_id`, `BookingDate`,
 (33, 7, 'Divyrajsinh', 11, '0000-00-00', '0000-00-00', '2023-01-29', 2, 2, 8400, NULL, 0),
 (34, 7, 'me', 3, '0000-00-00', '2023-01-30', '0000-00-00', 2, 1, 5998, NULL, 0),
 (35, 7, 'll', 3, '2023-01-30', '2023-01-30', '2023-01-31', 2, 2, 11996, NULL, 0),
-(36, 7, 'hhhh', 3, '2023-02-06', '2023-02-07', '2023-02-28', 22, 3, 197934, NULL, 0);
+(36, 7, 'hhhh', 3, '2023-02-06', '2023-02-07', '2023-02-28', 22, 3, 197934, NULL, 0),
+(37, 46, 'me', 1, '2023-02-20', '2023-02-22', '2023-02-24', 3, 1, 9375, NULL, 0),
+(38, 7, 'chirag', 1, '2023-02-22', '2023-02-22', '2023-02-25', 4, 2, 25000, 2, 0),
+(39, 7, 'rahul', 2, '2023-02-24', '2023-02-16', '2023-02-26', 11, 1, 23100, NULL, 0),
+(40, 7, 'rahul', 2, '2023-02-24', '2023-02-26', '2023-02-26', 1, 1, 2100, NULL, 0),
+(41, 7, 'rahul', 2, '2023-02-24', '2023-02-23', '2023-02-21', 3, 2, 12600, NULL, 0),
+(42, 7, 'rahul', 2, '2023-02-24', '2023-02-23', '2023-02-21', 3, 2, 12600, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -75,7 +81,7 @@ CREATE TABLE `city` (
   `Id` int(11) NOT NULL,
   `CityName` varchar(100) NOT NULL,
   `State_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `city`
@@ -182,7 +188,7 @@ CREATE TABLE `client_reiviws` (
   `User_id` int(11) NOT NULL,
   `Reviews` varchar(1000) NOT NULL,
   `Stars` int(5) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `client_reiviws`
@@ -190,8 +196,8 @@ CREATE TABLE `client_reiviws` (
 
 INSERT INTO `client_reiviws` (`Id`, `User_id`, `Reviews`, `Stars`) VALUES
 (1, 7, 'Very good for the most part. Fortunately we had the phone number of the driver who collected us on arrival and he was able to help us.', 5),
-(4, 26, 'Very good for the most part. Fortunately we had the phone number of the driver who collected us on arrival and he was able to help us.', 4),
-(5, 27, 'Great package and good follow up.\r\nCritical travel info does get lost with all of the other marketing info so I deleted it and then had to get it sent again as it wasn\'t just marketing.\r\nVery happy and hope there are more all included deals available.', 4),
+(4, 46, 'Very good for the most part. Fortunately we had the phone number of the driver who collected us on arrival and he was able to help us.', 4),
+(5, 7, 'Great package and good follow up.\r\nCritical travel info does get lost with all of the other marketing info so I deleted it and then had to get it sent again as it wasn\'t just marketing.\r\nVery happy and hope there are more all included deals available.', 4),
 (6, 7, 'Nice', 5);
 
 -- --------------------------------------------------------
@@ -203,7 +209,7 @@ INSERT INTO `client_reiviws` (`Id`, `User_id`, `Reviews`, `Stars`) VALUES
 CREATE TABLE `country` (
   `Id` int(11) NOT NULL,
   `CountryName` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `country`
@@ -225,6 +231,20 @@ INSERT INTO `country` (`Id`, `CountryName`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `forgotpasswordotps`
+--
+
+CREATE TABLE `forgotpasswordotps` (
+  `Id` int(11) NOT NULL,
+  `GeneratedOTP` varchar(6) NOT NULL,
+  `GeneratedOn` datetime NOT NULL,
+  `ExpiresOn` datetime NOT NULL,
+  `User_Id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `hotelmedia`
 --
 
@@ -232,7 +252,7 @@ CREATE TABLE `hotelmedia` (
   `Id` int(11) NOT NULL,
   `HotelImages` varchar(100) NOT NULL,
   `Hotel_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `hotelmedia`
@@ -253,9 +273,6 @@ INSERT INTO `hotelmedia` (`Id`, `HotelImages`, `Hotel_id`) VALUES
 (12, 'TheFortuneLandmark.jpg', 12),
 (13, 'HawthornSuitesbyWyndham.jpg', 13),
 (14, 'THEGRANDASTORIASOMANTH.jpg', 16),
-(19, 'about-img.jpg', 25),
-(20, '6.jpg', 25),
-(21, '79.jpg', 25),
 (22, 'hotelfortunepalace2.jpg', 1),
 (23, 'hotelfortunepalace3.jpg', 1),
 (26, 'HotelHighwayHari2.jpg', 2),
@@ -299,7 +316,7 @@ CREATE TABLE `hotels` (
   `HotelDetail` varchar(10000) NOT NULL,
   `User_id` int(11) NOT NULL,
   `HotelIsDelete` int(11) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `hotels`
@@ -319,8 +336,7 @@ INSERT INTO `hotels` (`Id`, `HotelName`, `PerDayPrice`, `City_id`, `HotelDetail`
 (11, 'Novotel Ahmedabad', 4699, 4, 'Novotel Ahmedabad – a 5 star contemporary business hotel located in the central business district of Ahmedabad on S G Highway with easy access to Gandhinagar, Sanand, Changodar industrial area and 15... \r\n\r\nFront office team is very helpful and nice Mr. Pankaj and Ankit was very helpful during my stay', 22, 0),
 (12, 'The Fortune Landmark', 4949, 4, 'Only 1 km from downtown Ahmedabad, the Fortune Landmark Hotel offers air-conditioned rooms and 3 dining options. The hotel features a fitness centre. very good property and very good food', 23, 0),
 (13, 'Hawthorn Suites by Wyndham', 5040, 5, 'Get the celebrity treatment with world-class service at Hawthorn Suites by Wyndham Dwarka\r\nSituated in Dwarka, 7 km from Dwarkadhish Temple, Hawthorn Suites by Wyndham Dwarka features accommodation with a restaurant, free private parking, a fitness centre and a garden. Boasting a concierge service, this property also provides guests with an outdoor pool. The accommodation provides a 24-hour front desk, room service and currency exchange for guests.\r\n\r\nAt the hotel, rooms come with a wardrobe. Complete with a private bathroom fitted with a shower and slippers, the rooms at Hawthorn Suites by Wyndham Dwarka have a TV and air conditioning, and some rooms include a seating area.\r\n\r\nThe accommodation offers a continental or buffet breakfast.\r\n\r\nHawthorn Suites by Wyndham Dwarka offers a children\'s playground. The area is popular for cycling, and car hire is available at the hotel.', 24, 0),
-(16, 'THE GRAND ASTORIA SOMANTH', 1881, 6, 'Set in Somnath, 11 km from Somnath Temple, THE GRAND ASTORIA SOMANTH offers accommodation with a restaurant, free private parking, a shared lounge and a garden. This 3-star hotel offers a shared kitchen and room service. The property features a hot spring bath, evening entertainment and a 24-hour front desk.\r\n\r\nAt the hotel all rooms come with air conditioning, a desk, a flat-screen TV, a private bathroom, bed linen, towels and a patio with a garden view. THE GRAND ASTORIA SOMANTH provides certain units with sea views, and every room includes a balcony. The units at the accommodation come with a seating area.\r\n\r\nA buffet breakfast is available every morning at THE GRAND ASTORIA SOMANTH.\r\n\r\nThe hotel offers a children\'s playground. The area is popular for cycling, and bike hire and car hire are available at THE GRAND ASTORIA SOMANTH.\r\n\r\nThe nearest airport is Diu Airport, 92 km from the accommodation.', 25, 0),
-(25, 'dfsdf', 5555, 69, 'trtertr', 19, 0);
+(16, 'THE GRAND ASTORIA SOMANTH', 1881, 6, 'Set in Somnath, 11 km from Somnath Temple, THE GRAND ASTORIA SOMANTH offers accommodation with a restaurant, free private parking, a shared lounge and a garden. This 3-star hotel offers a shared kitchen and room service. The property features a hot spring bath, evening entertainment and a 24-hour front desk.\r\n\r\nAt the hotel all rooms come with air conditioning, a desk, a flat-screen TV, a private bathroom, bed linen, towels and a patio with a garden view. THE GRAND ASTORIA SOMANTH provides certain units with sea views, and every room includes a balcony. The units at the accommodation come with a seating area.\r\n\r\nA buffet breakfast is available every morning at THE GRAND ASTORIA SOMANTH.\r\n\r\nThe hotel offers a children\'s playground. The area is popular for cycling, and bike hire and car hire are available at THE GRAND ASTORIA SOMANTH.\r\n\r\nThe nearest airport is Diu Airport, 92 km from the accommodation.', 25, 0);
 
 -- --------------------------------------------------------
 
@@ -332,7 +348,7 @@ CREATE TABLE `placemedia` (
   `Id` int(11) NOT NULL,
   `PlaceImages` varchar(100) NOT NULL,
   `Place_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `placemedia`
@@ -347,12 +363,6 @@ INSERT INTO `placemedia` (`Id`, `PlaceImages`, `Place_id`) VALUES
 (6, 'SwaminarayanTemple.jpg', 15),
 (7, 'Rani_ki_vav_01.jpg', 16),
 (8, 'Tajmahal3.jpg', 2),
-(15, '5.jpg', 26),
-(16, 'dholavira.jpg', 26),
-(17, 'about-img.jpg', 26),
-(18, 'AnayaBeaconHotel.jpg', 27),
-(19, 'dholavira.jpg', 27),
-(20, '6.jpg', 27),
 (21, 'Tajmahal2.jpg', 2),
 (22, 'bhujiyo-kotho2.jpg', 3),
 (23, 'bhujiyo-kotho3.jpg', 3),
@@ -379,7 +389,7 @@ CREATE TABLE `places` (
   `City_id` int(11) NOT NULL,
   `Discription` mediumtext NOT NULL,
   `PlaceIsDelete` int(11) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `places`
@@ -387,14 +397,12 @@ CREATE TABLE `places` (
 
 INSERT INTO `places` (`Id`, `PlaceName`, `City_id`, `Discription`, `PlaceIsDelete`) VALUES
 (2, 'Taj Mahal', 13, 'The Taj Mahal is located on the right bank of the Yamuna River in a vast Mughal garden that encompasses nearly 17 hectares, in the Agra District in Uttar Pradesh. It was built by Mughal Emperor Shah Jahan in memory of his wife Mumtaz Mahal with construction starting in 1632 AD and completed in 1648 AD, with the mosque, the guest house and the main gateway on the south, the outer courtyard and its cloisters were added subsequently and completed in 1653 AD.', 0),
-(3, 'Bhujiyo Kotho', 1, 'About the location: This impressive yet crumbling tower in Jamnagar overlooks the south side of Ranmal Lake. It is also known as the Bhujiyo Bastion. Restoration work is underway; once completed, visitors will be able to view the city from the top of the tower.\r\n\r\nBrief History: It is believed that the king of Jamnagar and Bhuj were brothers who had set up their kingdoms about 300km apart. They even designed the cities in the same fashion. Bhujiyo Kotho was presumably the entrance to a secret passage from Jamnagar to Bhuj. While no one ratified this by taking the part, the story was intriguing.\r\n\r\nBest time to visit: The best time to visit is between November and February.', 0),
+(3, 'Bhujiyo Kotho', 1, 'About the location: This impressive yet crumbling tower in Jamnagar overlooks the south side of Ranmal Lake. It is also known as the Bhujiyo Bastion. Restoration work is underway; once completed, visitors will be able to view the city from the top of the tower.\n\nBrief History: It is believed that the king of Jamnagar and Bhuj were brothers who had set up their kingdoms about 300km apart. They even designed the cities in the same fashion. Bhujiyo Kotho was presumably the entrance to a secret passage from Jamnagar to Bhuj. While no one ratified this by taking the part, the story was intriguing.\n\nBest time to visit: The best time to visit is between November and February.', 0),
 (4, 'Burj Khalifa', 91, 'The Burj Khalifa (/ˈbɜːrdʒ kəˈliːfə/; Arabic: برج خليفة, Arabic pronunciation: [bʊrd͡ʒ xaˈliːfa], Khalifa Tower), known as the Burj Dubai prior to its inauguration in 2010, is a skyscraper in Dubai, United Arab Emirates. With a total height of 829.8 m (2,722 ft, or just over half a mile) and a roof height (excluding antenna, but including a 223 m spire[2]) of 828 m (2,717 ft), the Burj Khalifa has been the tallest structure and building in the world since its topping out in 2009, supplanting Taipei 101, the previous holder of that status.\r\n\r\nHistory of height increases\r\n\r\nBurj Khalifa compared with some other well-known tall structures\r\nThere are unconfirmed reports of several planned height increases since its inception. Originally proposed as a virtual clone of the 560 m (1,837 ft) Grollo Tower proposal for Melbourne, Australia\'s Docklands waterfront development, the tower was redesigned by Skidmore, Owings and Merrill.[32] Marshall Strabala, a Skidmore, Owings and Merrill architect who worked on the project until 2006, said in late 2008 that Burj Khalifa was designed to be 808 m (2,651 ft) tall.\r\n\r\nThe architect who designed it, Adrian Smith, felt that the uppermost section of the building did not culminate elegantly with the rest of the structure, so he sought and received approval to increase its height.[citation needed] It was stated that this change did not add any floors, which fit with Smith\'s attempts to make the crown more slender. The building opened on 4 January 2010.', 0),
 (13, 'Kedarnath', 90, 'Kedarnath is located at a distance of 223 km from Rishikesh in Uttarakhand and close to the source of the Mandakini River at the height of 3,583 m (11,755 ft) above sea level. The township is built on a barren stretch of land on the shores of Mandakini river. The surrounding scenery of the Himalayas and green pastures makes it a very attractive place for pilgrimage and trekking. Behind the town and the Kedarnath Temple, stands the majestic Kedarnath peak at 6,940 m (22,769 ft), the Kedar Dome at 6,831 m (22,411 ft) and other peaks of the range.\r\n\r\nHistory :\r\n\r\nKedarnath has been a pilgrimage centre since ancient times.The temple\'s construction is credited to the Pandava brothers mentioned in the Mahabharata. However, the Mahabharata does not mention any place called Kedarnath. One of the earliest references to Kedarnath occurs in the Skanda Purana (c. 7th-8th century), which names Kedara (Kedarnath) as the place where Lord Shiva released the holy waters of Ganga from his matted hair, resulting in the formation of the Ganges River', 0),
 (14, 'Dholavira', 2, 'Dholavira (Gujarati: ધોળાવીરા) is an archaeological site at Khadirbet in Bhachau Taluka of Kutch District, in the state of Gujarat in western India, which has taken its name from a modern-day village 1 kilometre (0.62 mi) south of it. This village is 165 km (103 mi) from Radhanpur. Also known locally as Kotada timba, the site contains ruins of a city of the ancient Indus Valley civilization Earthquakes have repeatedly affected Dholavira, including a particularly severe one around 2600 BC.\r\n\r\nThe Harappans spoke an unknown language and their script has not yet been deciphered. It is believed to have had about 400 basic signs, with many variations. The signs may have stood both for words and for syllables. The direction of the writing was generally from right-to-left.[35] Most of the inscriptions are found on seals (mostly made out of stone) and sealings (pieces of clay on which the seal was pressed down to leave its impression). Some inscriptions are also found on copper tablets, bronze implements, and small objects made of terracotta, stone and faience. The seals may have been used in trade and also for official administrative work. A lot of inscribed material was found at Mohenjo-daro and other Indus Valley Civilisation sites.', 0),
 (15, 'Baps Shri Swaminarayan Mandir', 1, 'At a distance of 6 km from Jamnagar Railway Station, BAPS Swaminarayan Mandir is a Hindu Temple located on Dwarka Road in the outskirts of Jamnagar city. Situated opposite to the airport, it is one of the popular Swaminarayan Temples in Gujarat and among the best places to visit in Jamnagar as part of Jamnagar Tour.\r\n\r\nDedicated to Lord Swaminarayan, the Swaminarayan Temple in Jamnagar is a very beautiful temple with an air of silence and spirituality at its best. The temple is a remarkable structure of architectural brilliance. The temple also has two separate shrines dedicated to Lord Shiva-Parvati and Lord Rama-Sita. It has a small museum at the bottom of the main temple. It also has a vast well maintained garden and a cafeteria that serves delicious veg snacks.\r\n\r\nThe temple compound is so calm and serene and the sculptures, carvings on the wall and details are a treat to the eyes. It looks ethereal in the night due to its lighting. While you climb up the stairs that lead to the main structure, a wave of divinity seems to emanate from the temple compound. Also, the temple hosts a number of festivals and fairs along with daily prayers.\r\n\r\nTimings: 7.30 AM - 12 PM & 4 PM - 8.30 PM', 0),
-(16, 'Rani Ki Vav ', 3, 'Rani Ki Vav is a stepwell situated in the town of Patan in Gujarat state of India. It is located on the banks of Saraswati river. Its construction is attributed to Udayamati, daughter of Khengara of Saurashtra, queen and spouse of the 11th-century Chaulukya king Bhima I. Silted over, it was rediscovered in 1940s and restored in 1980s by the Archaeological Survey of India. It has been listed as one of the UNESCO\'s World Heritage Sites since 2014.\r\n\r\nThe finest and one of the largest examples of its kind and designed as an inverted temple highlighting the sanctity of water, the stepwell is divided into seven levels of stairs with sculptural panels; more than 500 principal sculptures and over a thousand minor ones combine religious, mythological and secular imagery.', 0),
-(26, 'rfgerg', 69, 'rertetert', 0),
-(27, 'sdfs', 33, 'sdfsdfsd', 0);
+(16, 'Rani Ki Vav ', 3, 'Rani Ki Vav is a stepwell situated in the town of Patan in Gujarat state of India. It is located on the banks of Saraswati river. Its construction is attributed to Udayamati, daughter of Khengara of Saurashtra, queen and spouse of the 11th-century Chaulukya king Bhima I. Silted over, it was rediscovered in 1940s and restored in 1980s by the Archaeological Survey of India. It has been listed as one of the UNESCO\'s World Heritage Sites since 2014.\r\n\r\nThe finest and one of the largest examples of its kind and designed as an inverted temple highlighting the sanctity of water, the stepwell is divided into seven levels of stairs with sculptural panels; more than 500 principal sculptures and over a thousand minor ones combine religious, mythological and secular imagery.', 0);
 
 -- --------------------------------------------------------
 
@@ -406,7 +414,7 @@ CREATE TABLE `states` (
   `Id` int(11) NOT NULL,
   `StateName` varchar(100) NOT NULL,
   `Country_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `states`
@@ -471,10 +479,10 @@ CREATE TABLE `users` (
   `UserType` varchar(1) NOT NULL DEFAULT 'U',
   `Email` varchar(100) NOT NULL,
   `PasswordHash` varchar(100) NOT NULL,
-  `FirebaseToken` varchar(255) DEFAULT NULL,
+  `FirebaseToken` varchar(500) DEFAULT NULL,
   `Status` tinyint(1) DEFAULT 1,
   `UserIsDelete` int(11) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
@@ -482,7 +490,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`Id`, `Name`, `MobileNumber`, `UserType`, `Email`, `PasswordHash`, `FirebaseToken`, `Status`, `UserIsDelete`) VALUES
 (6, 'Divyrajsinh', '1234567890', 'A', 'divyrajsinh@gmail.com', '$2y$10$B7WUT579oyJbnHyCrvHS9.altJFmv7ldSZ5hhRzfmM9baV0OhoUVi', NULL, 1, 0),
-(7, 'Darshan', '123467890', 'U', 'abc@gmail.com', '$2y$10$xFmm.iG5EtjPdMHmP.k4T.mJXV9jn2y3A4JxIPz1lSC.LY7Q1FK/W', NULL, 1, 0),
+(7, 'Darshan', '123467890', 'U', 'abc@gmail.com', '$2y$10$xFmm.iG5EtjPdMHmP.k4T.mJXV9jn2y3A4JxIPz1lSC.LY7Q1FK/W', 'fLj0yaFESCix5hjNf_UQBR:APA91bHyeyZB0yp0S-zrW9HZZ1-FC8j5X2-xIu12THKt4G3GRvd1fHSNInrlBqpltWjG_XKQdBUBw1pG9exNJB1tN-46O_5a9kILLFllwQhpW2rSJb3HKJfXiqVEgAh_qAnj_Vk6mQCa', 1, 0),
 (12, 'Hotel Fortune Palace', '1234567891', 'H', 'HotelFortunePalace@gmail.com', '$2y$10$ep47QVwqr1ONgQtbutrs0OIhMJdx.QVr2rnjILlZaX6Vf7l8xC6d2', NULL, 1, 0),
 (13, 'Hotel Highway Hari', '9595959595', 'H', 'HotelHighwayHari@gmail.com', '$2y$10$MzJoTT9Q5D7lq36Mgr4.4uZZ8lJBbIH9xsYcpwK9RNcZLoFuO.Gjq', NULL, 1, 0),
 (14, 'Hotel Foliage', '9090909090', 'H', 'HotelFoliage@gmail.com', '$2y$10$eMRbuzh458MYv7BhnB4A6u5vTyI.4QwJa29Svm5ea1QHmsvTCgwNa', NULL, 1, 0),
@@ -497,12 +505,7 @@ INSERT INTO `users` (`Id`, `Name`, `MobileNumber`, `UserType`, `Email`, `Passwor
 (23, 'The Fortune Landmark\r\n', '9999999999', 'H', 'TheFortuneLandmark@gmail.com', '$2y$10$BKmcJNTbr7O5jgwnvmki4OxbwL6ubarPUMSVNll06dS7UZM2ZY4aa', NULL, 1, 0),
 (24, 'Hawthorn Suites by Wyndham', '2121212121', 'H', 'HawthornSuitesbyWyndham@gmail.com', '$2y$10$QPeO2muiIkSK.he/dfF8j.WxUo95L3mqKrfWNFecdM3o.ZCSChu6q', NULL, 1, 0),
 (25, 'THE GRAND ASTORIA SOMANTH', '9292929292', 'H', 'THEGRANDASTORIASOMANTH@gmail.com', '$2y$10$l9BvQIlRcmgAh31NFlLiC.GAPuZT7zwyp47iZWTvtB7e0A66b5wl2', NULL, 1, 0),
-(26, 'nishit', '1234567891', 'U', 'nishit@gmail.com', '$2y$10$LrII32RrO.0peyKwGrLJqOJHTSH.I.KFgzRv5I23eyY2DxCc6R9oi', NULL, 1, 0),
-(27, 'Alfu', '9876543210', 'U', 'alfu@gmail.com', '$2y$10$2PgFzRmzq7HSSPj1l8gVIuc52cUobL5izuDbUJX/Ku4VaYIRQYJwC', NULL, 1, 0),
-(35, 'hi', '2154646', 'U', 'hi@gmail.com', '$2y$10$nwpa9B9n8ZIL9PI6R9m65.nXavzsTvSHLG7s62MkTtzWfa4frW2yO', NULL, 1, 0),
-(42, 't4', '1234567890', 'U', 't4@gmail.com', '$2y$10$B61pSLH3tcKNwoI4m5em9e2y3ZvfmBgSmHDRXBzlAoqYZ8OHauJfy', NULL, 1, 0),
-(43, 'Jetho', '123456789', 'U', 'jetho@gmail.com', '$2y$10$f2CJ8hKsWa0t85HtC9f/ueUx/XQkn0/2Kq9xKSNik8Iha80d7nSK2', NULL, 1, 0),
-(44, 'lll', '8999999', 'U', 'lll@gmail.com', '$2y$10$pnui.g/5ErtbGT7QdWwtreEdBZ57BhzFJOIWclIAz49Jq1.ZID8ye', NULL, 1, 0);
+(46, 'me', '1111111', 'U', 'duvrajsinh@gmail.com', '$2y$10$XN9iXxpj53.HiewXcSvXV.V0l3Ki8pms9o2.nIua6tDJ.v/qej3le', 'eotHKaSyR1mWAdGiL4FKoG:APA91bG-QArAn2fJef_KYrSw74Bu6IZHp4M_PLHo8ghezsfv5C3-L07d7xGamqo_JvAns15L2P_EZ0zbFWAZDmBFRV6YrP3IcSNwKvfbmvp7XRbF8nWzjbYV85QJdDFZRCAd_VbDWNiW', 1, 0);
 
 --
 -- Indexes for dumped tables
@@ -535,6 +538,13 @@ ALTER TABLE `client_reiviws`
 --
 ALTER TABLE `country`
   ADD PRIMARY KEY (`Id`);
+
+--
+-- Indexes for table `forgotpasswordotps`
+--
+ALTER TABLE `forgotpasswordotps`
+  ADD PRIMARY KEY (`Id`),
+  ADD KEY `fkForgotPasswordUserId` (`User_Id`);
 
 --
 -- Indexes for table `hotelmedia`
@@ -587,7 +597,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `booking`
 --
 ALTER TABLE `booking`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT for table `city`
@@ -606,6 +616,12 @@ ALTER TABLE `client_reiviws`
 --
 ALTER TABLE `country`
   MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT for table `forgotpasswordotps`
+--
+ALTER TABLE `forgotpasswordotps`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `hotelmedia`
@@ -641,7 +657,7 @@ ALTER TABLE `states`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- Constraints for dumped tables
@@ -665,6 +681,12 @@ ALTER TABLE `city`
 --
 ALTER TABLE `client_reiviws`
   ADD CONSTRAINT `fkreviewuser` FOREIGN KEY (`User_id`) REFERENCES `users` (`Id`);
+
+--
+-- Constraints for table `forgotpasswordotps`
+--
+ALTER TABLE `forgotpasswordotps`
+  ADD CONSTRAINT `fkForgotPasswordUserId` FOREIGN KEY (`User_Id`) REFERENCES `users` (`Id`);
 
 --
 -- Constraints for table `hotelmedia`

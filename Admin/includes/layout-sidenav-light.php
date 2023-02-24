@@ -26,7 +26,7 @@ else{
     <title>Dashboard - SB Admin</title>
     <link href="./css/style.css" rel="stylesheet" />
     <link href="./css/styles.css" rel="stylesheet" />
-    <link rel="stylesheet" href="../css/animate.css">
+    <link rel="stylesheet" href="./css/animate.css">
     <script src="./js/jquery-3.6.0.min.js"></script>
     <script src="./js/all.js" crossorigin="anonymous"></script>
 </head>
