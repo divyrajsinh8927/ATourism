@@ -202,7 +202,7 @@ function addBooking($data, $CONNECTION)
 
 function deleteBooking($id, $CONNECTION)
 {
-    $query = "UPDATE `bookings` SET bookingIsDelete = ? WHERE `Id`= ?";
+    $query = "UPDATE `booking` SET bookingIsCancel = ? WHERE `Id`= ?";
     $statement = $CONNECTION->prepare($query);
 
     $statement->execute([1,$id]);
